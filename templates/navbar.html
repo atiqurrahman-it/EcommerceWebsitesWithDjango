@@ -1,0 +1,54 @@
+  {% load static %}
+{% load cart_tag %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+  <a class="navbar-brand" href="{% url 'App_shop:homepage' %}">E-commerce</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'App_shop:homepage' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+
+     <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </ul>
+      <ul class="navbar-nav ml-auto">
+       {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'App_Order:cart_view' %}"><i class="fa fa-shopping-cart"></i>Card
+              <span class="badge badge-light" >{{ request.user | total_Cart_or_order_items }}</span> </a></li> <!-- request.user parameter hishabe jabe-->
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <i class="fas fa-user-tie"></i> {{ request.user.profile.username }} 's Profile
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'user_login:edit_profile' %}">Profile</a>
+          <a class="dropdown-item" href="#">Order</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'user_login:logout' %}">Logout</a>
+        </div>
+      </li>
+       {% else %}
+           <li class="nav-item">
+            <a href="{% url 'user_login:login' %}" class="btn btn-primary nav-link"> Login</a>
+        </li> &nbsp;
+        <li class="nav-item">
+            <a href="{% url 'user_login:sing_up' %}" class="btn btn-primary nav-link"> Register</a>
+        </li>
+       {% endif %}
+
+           </ul>
+  </div>
+        </div>
+</nav>
+
+
+

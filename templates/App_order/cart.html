@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ title }} | E-commerce {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %} {% endblock inlineStyle %}
+
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+    <div class="container my-5">
+    <div class="my-5">
+        <h2>Your Car {{ total_order_items }}</h2>
+    </div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product_Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col" align="right">Price</th>
+            <th scope="col">Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for cart in carts %}
+            <tr>
+                <th scope="row" width="15%"> {{ forloop.counter }}</th>
+               <td> {{ cart.product.name }}</td>
+               <td>
+                   <a href="{% url 'App_Order:decrement' pk=cart.product.pk %}" class="mr-2"> <span class="badge badge-light"><i class="fas fa-minus">-</i></span></a>
+                   {{ cart.quantity }}
+                   <a href="{% url 'App_Order:increment' pk=cart.product.pk %}" class="mr-2"> <span class="badge badge-light"><i class="fas fa-plus">+</i></span></a>
+               </td>
+               <td> {{ cart.quantity }} x {{ cart.product.price }} =&#2547 {{ cart.get_total_price }}</td>
+               <td><a href="{% url 'App_Order:remove_cart' pk=cart.product.pk %}" class="btn btn-danger btn-sm"> Remove From Cart</a></td>
+            </tr>
+            {% endfor %}
+           <tr>
+               <th scope="row"></th>
+               <td colspan="3">Total Price</td>
+               <td align="right">&#2547; {{ order.get_totals|floatformat:2 }}</td>
+           </tr>
+          <tr>
+              <th scope="row"></th>
+              <td colspan="4" class="text-right">
+                  <a href="{% url 'App_shop:homepage' %}" class="btn btn-warning mr-4">Continue Shopping </a>
+                  <a href="{% url 'App_payment:checkout' %}" class="btn btn-success mr-4">Proceed to Checkout </a>
+              </td>
+          </tr>
+        </tbody>
+    </table>
+    </div>
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}

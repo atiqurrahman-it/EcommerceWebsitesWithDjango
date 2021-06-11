@@ -1,0 +1,47 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <!-- Fontawesome  -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" integrity="sha384-R3QzTxyukP03CMqKFe0ssp5wUvBPEyy9ZspCB+Y01fEjhMwcXixTyeot+S40+AjZ" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'extendFile/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'myfile/css/myStyle.css' %}">
+
+    <title> {% block title %}{% endblock %} </title>
+      {% block stylelink %} {% endblock stylelink %}
+      {% block inlineStyle %}
+       {% endblock inlineStyle %}
+
+  </head>
+  <body>
+
+  {% block navbar %}
+  {% endblock navbar %}
+<div class="container">
+{% include 'inheritance_page/message.html' %}
+  {% block main_contain %}
+  {% endblock main_contain %}
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'extendFile/js/jQuery_v3.6.0.js' %}"  ></script>
+    <script src="{% static 'extendFile/js/popper.min.js'%}" ></script>
+    <script src="{% static 'extendFile/js/bootstrap.min.js' %}" ></script>
+    <!-- # message -->
+    <script src="{% static 'myfile/js/message.js' %}" ></script>
+
+    <script src="{% static 'myfile/js/myJquery.js' %}" ></script>
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}
+
+  </body>
+</html>

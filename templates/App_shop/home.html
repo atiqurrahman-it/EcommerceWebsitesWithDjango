@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home {{ title }} | E-commerce {% endblock title %}
+{% block stylelink %} {% endblock stylelink %}
+{% block inlineStyle %} {% endblock inlineStyle %}
+
+{% block navbar %}
+    {% include 'navbar.html' %}
+{% endblock navbar %}
+
+{% block main_contain %}
+    <div class="container my-5">
+        <h3 class="my-5">Featured Products</h3>
+        <div class="row">
+            {% for product in object_list %}
+                <div class="col-md-6 col-sm-12 col-lg-3">
+                    <figure class="card card-product">
+                        <div class="img-wrap">
+                            <img src="{{ product.main_product_img.url }}" style="width:100%;height:300px;" alt="Img Not found">
+                        </div>
+                        <figcaption class="info-wrap">
+                            <h6 class="title" > <a href="{% url 'App_shop:single_product' pk=product.pk %}"> {{ product.name }}</a> </h6>
+                            <div class="action-wrap">
+                                <div class="price-wrap h5">
+                                    <span class="price-new"> &#2547 {{ product.price|floatformat:2 }} </span>
+                                    <span class="price-old"><del> &#2547 {{ product.old_price|floatformat:2 }}  </del></span>
+                                </div>
+                                <div>
+                                     <a href="{% url 'App_Order:add_cart' pk=product.pk %}"><button href="" class="btn btn-success" style="width: 100%;"> Add To Cart  </button></a>
+                                </div>
+                            </div>
+                        </figcaption>
+                    </figure>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}
