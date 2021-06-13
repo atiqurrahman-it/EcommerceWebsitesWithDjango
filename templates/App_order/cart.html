@@ -29,9 +29,9 @@
                 <th scope="row" width="15%"> {{ forloop.counter }}</th>
                <td> {{ cart.product.name }}</td>
                <td>
-                   <a href="{% url 'App_Order:decrement' pk=cart.product.pk %}" class="mr-2"> <span class="badge badge-light"><i class="fas fa-minus">-</i></span></a>
+                   <a href="{% url 'App_Order:decrement' pk=cart.product.pk %}" class="mr-2"> <span class="badge badge-light"><i class="fas fa-minus"></i></span></a>
                    {{ cart.quantity }}
-                   <a href="{% url 'App_Order:increment' pk=cart.product.pk %}" class="mr-2"> <span class="badge badge-light"><i class="fas fa-plus">+</i></span></a>
+                   <a href="{% url 'App_Order:increment' pk=cart.product.pk %}" class="mr-2"> <span class="badge badge-light"><i class="fas fa-plus"></i></span></a>
                </td>
                <td> {{ cart.quantity }} x {{ cart.product.price }} =&#2547 {{ cart.get_total_price }}</td>
                <td><a href="{% url 'App_Order:remove_cart' pk=cart.product.pk %}" class="btn btn-danger btn-sm"> Remove From Cart</a></td>

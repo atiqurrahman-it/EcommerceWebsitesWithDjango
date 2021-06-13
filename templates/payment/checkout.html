@@ -39,6 +39,14 @@
               <span class="float-right"><b> &#2547;  {{ order_total }}</b></span>
           </div>
         </div>
+     <br>
+    {% if saved_address.is_fully_filled %}
+                <a href="" class="btn btn-warning float-left btn-md">Make Payment </a>
+            {% else %}
+            <div class="alert alert-info">
+            <p> Please fill up The Information to make payment . </p>
+            </div>
+        {% endif %}
     </div>
     </div>
 {% endblock main_contain %}
