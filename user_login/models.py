@@ -98,7 +98,7 @@ class Profile(models.Model):
                 return False
         return True
 
-
+# auto profile mode a object create hobe  when user register korbe 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
