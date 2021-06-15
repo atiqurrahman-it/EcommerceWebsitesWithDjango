@@ -33,7 +33,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'user_login:edit_profile' %}">Profile</a>
-          <a class="dropdown-item" href="#">Order</a>
+          <a class="dropdown-item" href="{% url 'App_payment:pay_order' %}">Order</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'user_login:logout' %}">Logout</a>
         </div>

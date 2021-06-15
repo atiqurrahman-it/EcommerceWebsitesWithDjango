@@ -1,7 +1,7 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
 from .forms import BillingForm
-from App_Order.models import Order
+from App_Order.models import Order, Card
 from .models import BillingAddress
 from user_login.models import Profile
 from django.contrib import messages
@@ -105,14 +105,52 @@ def CompletePayment(request):
         if status == 'VALID':
             val_id = payment_data['val_id']
             tran_id = payment_data['tran_id']
-            messages.success(request, f"Your payment completed successfully ! please will be redirected after 5 second !")
+            messages.success(request,
+                             f"Your payment completed successfully ! please will be redirected after 5 second !")
+            # purchase call hobe , value dui ta pass korte hobe tai kwargs use korechi
+            return HttpResponseRedirect(reverse("App_payment:purchase", kwargs={'val_id': val_id, 'tran_id': tran_id}))
         elif status == 'FAILED':
             messages.warning(request, f"Your payment ! please Try Again ! please will be redirected after 5 second !")
         elif status == 'CANCELLED':
-            messages.warning(request, f"Your payment has been cancel . please Try Again ! please will be redirected after 5 second !")
+            messages.warning(request,
+                             f"Your payment has been cancel . please Try Again ! please will be redirected after 5 second !")
 
     # print(payment_data)
     data = {
         "title": 'complete payment'
     }
     return render(request, 'payment/p_complete.html', data)
+
+
+# this def work
+# Order models ordered=True  and Card models purchased=True korbe
+# and Order models paymentId add korbe &  orderId add hobe
+@login_required
+def purchase(request, val_id, tran_id):
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    order = order_qs[0]
+    order_id = tran_id
+    payment_id = val_id
+
+    order.ordered = True
+    order.paymentId = payment_id
+    order.orderId = order_id
+    order.save()
+
+    cart_items = Card.objects.filter(user=request.user, purchased=False)
+    for item in cart_items:
+        item.purchased = True
+        item.save()
+    return HttpResponseRedirect(reverse("App_shop:homepage"))
+
+
+@login_required
+def order_views(request):
+    try:
+        orders = Order.objects.filter(user=request.user, ordered=True)
+        data = {"orders": orders, "title": 'order'}
+    except:
+        messages.warning(request, f"You do not have an active order !")
+        return redirect("App_shop:homepage")
+
+    return render(request, 'payment/pay_order.html', data)

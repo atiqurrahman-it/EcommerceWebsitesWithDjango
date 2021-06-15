@@ -1,13 +1,13 @@
 from django import template
-from App_Order.models import Order
+from App_Order.models import Card
 
 register = template.Library()
 
 
 @register.filter
 def total_Cart_or_order_items(user):
-    order = Order.objects.filter(user=user, ordered=False)
+    order = Card.objects.filter(user=user, purchased=False)
     if order.exists():
-        return order[0].orderItems.count()
+        return order.count()
     else:
         return 0
