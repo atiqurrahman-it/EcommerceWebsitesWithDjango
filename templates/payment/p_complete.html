@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ title }} | E-commerce {% endblock title %}
+{% block stylelink %}
+ <meta http-equiv = "refresh" content = "5; url = {% url 'App_shop:homepage' %}" />
+ {% endblock stylelink %}
+{% block inlineStyle %} {% endblock inlineStyle %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block main_contain %}
+{% endblock main_contain %}
+
+{% block javascriptLink %} {% endblock javascriptLink %}
+{% block inlinejavascriptLink %} {% endblock inlinejavascriptLink %}

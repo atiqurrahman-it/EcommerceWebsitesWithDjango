@@ -23,8 +23,10 @@
     </ul>
       <ul class="navbar-nav ml-auto">
        {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'App_Order:cart_view' %}"><i class="fa fa-shopping-cart"></i>Card
-              <span class="badge badge-light" >{{ request.user | total_Cart_or_order_items }}</span> </a></li> <!-- request.user parameter hishabe jabe-->
+          <li class="nav-item"><a class="nav-link" href="{% url 'App_Order:cart_view' %}"><i class="fa fa-shopping-cart"></i>
+              <span>Card</span>
+              <span class="badge badge-danger" >{{ request.user | total_Cart_or_order_items }}</span>
+          </a></li> <!-- request.user parameter hishabe jabe-->
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            <i class="fas fa-user-tie"></i> {{ request.user.profile.username }} 's Profile
