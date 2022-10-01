@@ -10,7 +10,10 @@ from django.contrib.auth.decorators import login_required
 # payment for import
 import requests
 import socket
-from sslcommerz_python.payment import SSLCSession
+# pip install sslcommerz_python install e problem 
+
+# from sslcommerz_python.payment import SSLCSession
+
 from decimal import Decimal
 
 # csr validation not check
